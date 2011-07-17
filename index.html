@@ -42,6 +42,34 @@ var MechLayoutTool = new function ( ) {
 	};
 }
 
+var LASER_WEAPONS = new function ( ) {
+	var weapons = {};
+	//adds a weapon to the overall array of weapons
+	//should do reload in ms
+	this.addWeapon = function ( name, type, size, damage, reload, heat, recoil, effects  ) {
+		if(weapons[name]) {
+			cout("weapon "+name+" already exists");
+			return;
+		}
+		weapons[name] = new Weapon( name, type, size, damage, reload, heat, recoil, effects );
+	};
+	//returns a copy of a weapon in the DB
+	this.createWeapon = function ( name ) { 
+		if(weapon=weapons[name])
+			return new Weapon(weapon.name,weapon.type,weapon.size,weapon.damage,weapon.reload,
+						weapon.heat,weapon.recoil,weapon.effects);
+		cout("could not find weapon with name: "+name);
+		return;
+	};
+
+	this.addWeapon("ERLL",C.LASER,2,12,3000,10,0);
+	this.addWeapon("LL",C.LASER,2,10,2500,8,0);
+
+
+}
+
+
+
 var MECH = new function () { 
 	var COMPARTMENTS = new function ( ) {
 		var c = [];
@@ -125,8 +153,10 @@ Container.prototype.blockConstructor = function ( type ) {
 			return block;
 		}
 
-function Weapon ( name, type, damage, reload, heat, recoil, effects ) {
+function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
+	this.name = name;
 	this.type = type;
+	this.size = size;
 	this.damage = damage;
 	this.reload = reload;
 	this.heat = heat;
@@ -135,8 +165,10 @@ function Weapon ( name, type, damage, reload, heat, recoil, effects ) {
 }
 
 Weapon.prototype.toString = function ( ) {
-	return this.type
+	return this.name+" "+this.type;
 }
+
+//to avoid conflicts, should move definitions outside of here
 
 /*function ( type ) {
 			var block = document.createElement("div");
@@ -147,7 +179,7 @@ Weapon.prototype.toString = function ( ) {
 			return block;
 		}*/
 var tCompartment = new Compartment("CT",new Container(2,C.BALLISTIC),new Container(1,C.LASER));
-
+cout(LASER_WEAPONS.createWeapon("LL"));
 
 var test  = new Container(3,C.BALLISTIC);
 //document.getElementById("dump").appendChild(test.div);
