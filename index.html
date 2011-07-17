@@ -7,23 +7,16 @@
   
   
  <link rel="stylesheet" type="text/css" href="styles.css">
-  
+  <script type="text/javascript" src="Global.js"></script>
+  <script type="text/javascript" src="Weapon.js"></script>
+  <script type="text/javascript" src="Container.js"></script>
+  <script type="text/javascript" src="Compartment.js"></script>
   <script type='text/javascript'>
   //<![CDATA[ 
   dojo.connect(window, "onload", function(){
-  var cout = function(text) {
-    dojo.create("h1", {
-        innerHTML: text
-    }, dojo.byId("console"), "first");
+  
 
-}
 
-var C = {
-	BALLISTIC: 0,
-	LASER: 1,
-	MISSILE: 2,
-	OMNI: 3
-}
 
 var MechLayoutTool = new function ( ) {
 	this.MAX_PIECES = 12;
@@ -64,8 +57,6 @@ var LASER_WEAPONS = new function ( ) {
 
 	this.addWeapon("ERLL",C.LASER,2,12,3000,10,0);
 	this.addWeapon("LL",C.LASER,2,10,2500,8,0);
-
-
 }
 
 
@@ -81,92 +72,10 @@ var MECH = new function () {
 	};
 }
 
-//compartment has a size
-//this.name
-//this.shortName
-function Compartment(shortName) {
-	this.shortName = shortName;
-	this.armorType = "DEFAULT";
-	this.armorLevel = 1;
-	that = { "arguments": arguments };
-	this.containers = new function ( ) {
-		var containerArray = [];
-		for(var i=1;i<that.arguments.length;i++){
-			containerArray.push(that.arguments[i]);//we should do error checking to ensure its a container
-		}
-		return containerArray;
-	};
-	
-	cout(this);
-}
 
-Compartment.prototype.toString = function ( ) {
-		return this.shortName + "\n Armor Type: "+this.armorType
-				+"\n Armor Level: " +this.armorLevel+ "\n Containers:"
-				+this.containers;
-	}
 
-/*Have container extend an item class that would have all the construction features
-but they would have differing drag/drop interactions 
 
-or have a block item class then extend it for both weapon and container*/
 
-function Container ( size, type ) {
-	//needs a UID?
-	var STARTER = 0;
-	var EXTENSION = 1;
-	that = this;
-	this.size = size;
-	this.type = type;
-	this.div = new function ( ) {
-		var container = document.createElement("div");
-		switch ( type ) {
-			case C.BALLISTIC: container.className = "yellow"; break;
-			case C.LASER: container.className = "red"; break;
-			case C.MISSILE: container.className = "green"; break;
-			case C.OMNI: container.className = "gray"; break;
-		}
-		
-		container.appendChild(that.blockConstructor(STARTER));
-		for ( var i = 1; i < size; i++ ) {
-			container.appendChild(that.blockConstructor(EXTENSION));
-		}
-		return container;
-	};
-
-}
-
-Container.prototype.draw = function ( ) {
-	
-}
-
-Container.prototype.toString = function ( ) {
-		return "Container Type: "+this.type+" Container Size: "+this.size;
-	}
-
-Container.prototype.blockConstructor = function ( type ) {
-			var block = document.createElement("div");
-			switch ( type ) {
-				case 0: block.className = "starterBlock"; break;
-				case 1: block.className = "extensionBlock"; break;
-			}
-			return block;
-		}
-
-function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
-	this.name = name;
-	this.type = type;
-	this.size = size;
-	this.damage = damage;
-	this.reload = reload;
-	this.heat = heat;
-	this.recoil = recoil;
-	this.effects = effects;
-}
-
-Weapon.prototype.toString = function ( ) {
-	return this.name+" "+this.type;
-}
 
 //to avoid conflicts, should move definitions outside of here
 
