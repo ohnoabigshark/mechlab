@@ -68,16 +68,16 @@ function Compartment(shortName) {
 		}
 		return containerArray;
 	};
-	this.toString = function ( ) {
-		return this.shortName + "\n Armor Type: "+this.armorType
-				+"\n Armor Level: " +this.armorLevel+ "\n Containers:"
-				+this.containers;
-	};
+	
 	cout(this);
 }
 
-var tCompartment = new Compartment("CT","v","dd");
-alert(tCompartment.containers);
+Compartment.prototype.toString = function ( ) {
+		return this.shortName + "\n Armor Type: "+this.armorType
+				+"\n Armor Level: " +this.armorLevel+ "\n Containers:"
+				+this.containers;
+	}
+
 /*Have container extend an item class that would have all the construction features
 but they would have differing drag/drop interactions 
 
@@ -105,10 +105,16 @@ function Container ( size, type ) {
 		}
 		return container;
 	};
-	this.toString = function ( ) {
-		
-	};
+
 }
+
+Container.prototype.draw = function ( ) {
+	
+}
+
+Container.prototype.toString = function ( ) {
+		return "Container Type: "+this.type+" Container Size: "+this.size;
+	}
 
 Container.prototype.blockConstructor = function ( type ) {
 			var block = document.createElement("div");
@@ -119,6 +125,19 @@ Container.prototype.blockConstructor = function ( type ) {
 			return block;
 		}
 
+function Weapon ( name, type, damage, reload, heat, recoil, effects ) {
+	this.type = type;
+	this.damage = damage;
+	this.reload = reload;
+	this.heat = heat;
+	this.recoil = recoil;
+	this.effects = effects;
+}
+
+Weapon.prototype.toString = function ( ) {
+	return this.type
+}
+
 /*function ( type ) {
 			var block = document.createElement("div");
 			switch ( type ) {
@@ -127,6 +146,8 @@ Container.prototype.blockConstructor = function ( type ) {
 			}
 			return block;
 		}*/
+var tCompartment = new Compartment("CT",new Container(2,C.BALLISTIC),new Container(1,C.LASER));
+
 
 var test  = new Container(3,C.BALLISTIC);
 //document.getElementById("dump").appendChild(test.div);
