@@ -1,0 +1,117 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+    margin:0;
+    padding:0;
+    overflow: none;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img { 
+    border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;}
+
+body {
+	/*background-color: #05abe0;*/
+	background-color: white;
+}
+
+#console {
+	background-color: white;
+    height: 30%;
+    width: 50%;
+    border: 1px solid black;
+    overflow: scroll;
+    position: absolute;
+    top: 69%;
+}
+
+.gray div, .gray div:before {
+	border-color: gray;
+}
+
+.yellow div, .yellow div:before {
+	border-color: yellow;
+}
+
+.red div, .red div:before {
+	border-color: red;
+}
+
+.green div, .green div:before {
+	border-color: green;
+}
+
+
+/*div[class~="green"]:before {
+	border-color: red;
+}*/
+
+/*.starterBlock:before {
+	border-top-style: solid;
+	border-top-width: 1px;
+	content: "";
+	display: block;
+	height: 0px;
+	width: 100px;
+}*/
+
+.yellow:hover > div, .yellow:hover > div:before {
+	background-color: gray;
+	background-image: none;
+}
+
+.starterBlock { 
+	background-color: #ffffff;
+	background-image: -webkit-linear-gradient(top, rgba(190,190,190,0.5) 0%,rgba(190,190,190,0.5) 100%);
+	border-width: 1px;
+	border-style: solid;
+	display: block;
+	height: 40px;
+	width: 100px;
+}
+
+.extensionBlock:before {
+	content: '';
+	background-color: #ffffff;
+	background-image: -webkit-linear-gradient(top, rgba(190,190,190,0.5) 0%,rgba(190,190,190,0.5) 100%);
+	border-bottom-width: 0px !important;
+	border-top-width: 0px !important;
+	border-width: 1px;
+	border-style: solid;
+	height: 15px;
+	width: 60px;
+	display: block;
+	position: relative;
+	top: -15px;
+	left: 19px;
+}
+
+.extensionBlock {
+	background-color: #ffffff;
+	background-image: -webkit-linear-gradient(top, rgba(190,190,190,0.5) 0%,rgba(190,190,190,0.5) 100%);
+	border-width: 1px;
+	border-style: solid;
+	display: block;
+	height: 40px;
+	width: 100px;
+	margin-top: 13px;
+}

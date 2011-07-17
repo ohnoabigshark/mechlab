@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js.uncompressed.js'></script>
+  
+  
+ <link rel="stylesheet" type="text/css" href="styles.css">
+  
+  <script type='text/javascript'>
+  //<![CDATA[ 
+  dojo.connect(window, "onload", function(){
+  var cout = function(text) {
+	    dojo.create("h1", {
+	        innerHTML: text
+	    }, dojo.byId("console"), "first");
+	}
+
+var canvas = document.getElementById("c");
+var context = canvas.getContext("2d");
+function draw() {
+	if(canvas.getContext) {
+		
+		context.fillStyle = "rgb(200,0,00";
+		context.fillRect(10,10,55,50);
+		context.fillStyle = "rgba(0,0,200,0.5)";
+		context.fillRect(30,30,55,50);
+	}
+
+}
+
+function draw2() {
+	context.fillRect(25,25,100,100);
+	context.clearRect(45,45,60,60);
+	context.strokeRect(50,50,50,50);
+}
+
+function draw3(size,left,top) { 
+	context.beginPath();
+	context.moveTo(left,top);//left,top
+	context.lineTo(left+size,top+size);//left+size,top+size
+	context.lineTo(left+size,top-size);//left+size,top-size
+	context.lineTo(left,top);//left,top
+	context.stroke();
+}
+
+/*each compartment should allow you to click on it and select an item that could potentially fit
+can select a part and then the container will call renderElements on itself*/
+    cout("console is alive!!");
+    draw3(25,100,50);
+
+  });
+
+  //]]> 
+  </script>
+  
+</head>
+<body>
+<canvas style="border: 1px solid black;" id="c"></canvas>
+	<div id="console"></div> 
+</body>
+
+
+</html>

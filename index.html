@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js.uncompressed.js'></script>
+  
+  
+ <link rel="stylesheet" type="text/css" href="styles.css">
+  
+  <script type='text/javascript'>
+  //<![CDATA[ 
+  dojo.connect(window, "onload", function(){
+  var cout = function(text) {
+    dojo.create("h1", {
+        innerHTML: text
+    }, dojo.byId("console"), "first");
+
+}
+
+var C = {
+	BALLISTIC: 0,
+	LASER: 1,
+	MISSILE: 2,
+	OMNI: 3
+}
+
+var MechLayoutTool = new function ( ) {
+	this.MAX_PIECES = 12;
+	this.calculatePieceShortName = function ( i ) {
+		switch (i) {
+			case 10: return "CT"; break;
+			case 11: return "CX"; break;
+			default: switch (i%5) {
+				case 0: return ((i/5<1)?"L":"R")+"L";break;
+				case 1: return ((i/5<1)?"L":"R")+"A";break;
+				case 2: return ((i/5<1)?"L":"R")+"T";break;
+				case 3: return ((i/5<1)?"L":"R")+"S";break;
+				case 4:	return ((i/5<1)?"L":"R")+"E";break;
+			};
+		}
+	};
+}
+
+var MECH = new function () { 
+	var COMPARTMENTS = new function ( ) {
+		var c = [];
+		for(var i = 0; i<MechLayoutTool.MAX_PIECES; i++) {
+			var shortName = MechLayoutTool.calculatePieceShortName(i);
+			c[shortName] = []; //should be new compartment
+		}
+		return c;
+	};
+}
+
+//compartment has a size
+//this.name
+//this.shortName
+function Compartment(shortName) {
+	this.shortName=shortName;
+	that = { "arguments": arguments };
+	this.containers = new function ( ) {
+		var containerArray = [];
+		for(var i=1;i<that.arguments.length;i++){
+			containerArray.push(that.arguments[i]);//we should do error checking to ensure its a container
+		}
+		return containerArray;
+	};
+}
+
+var tCompartment = new Compartment("CT","v","dd");
+alert(tCompartment.containers);
+/*Have container extend an item class that would have all the construction features
+but they would have differing drag/drop interactions 
+
+or have a block item class then extend it for both weapon and container*/
+
+function Container ( size, type ) {
+	//needs a UID?
+	var STARTER = 0;
+	var EXTENSION = 1;
+	that = this;
+	this.size = size;
+	this.type = type;
+	this.div = new function ( ) {
+		var container = document.createElement("div");
+		switch ( type ) {
+			case C.BALLISTIC: container.className = "yellow"; break;
+			case C.LASER: container.className = "red"; break;
+			case C.MISSILE: container.className = "green"; break;
+			case C.OMNI: container.className = "gray"; break;
+		}
+		
+		container.appendChild(that.blockConstructor(STARTER));
+		for ( var i = 1; i < size; i++ ) {
+			container.appendChild(that.blockConstructor(EXTENSION));
+		}
+		return container;
+	};
+}
+
+Container.prototype.blockConstructor = function ( type ) {
+			var block = document.createElement("div");
+			switch ( type ) {
+				case 0: block.className = "starterBlock"; break;
+				case 1: block.className = "extensionBlock"; break;
+			}
+			return block;
+		}
+
+/*function ( type ) {
+			var block = document.createElement("div");
+			switch ( type ) {
+				case STARTER: block.className = "starterBlock"; break;
+				case EXTENSION: block.className = "extensionBlock"; break;
+			}
+			return block;
+		}*/
+
+var test  = new Container(3,C.BALLISTIC);
+//document.getElementById("dump").appendChild(test.div);
+document.body.appendChild(test.div);
+
+/*each compartment should allow you to click on it and select an item that could potentially fit
+can select a part and then the container will call renderElements on itself*/
+    cout("console is alive!!");
+  });
+  //]]> 
+  </script>
+  
+</head>
+<body>
+	<div id="containers"></div>
+	<div id="console"></div> 
+</body>
+
+
+</html>
