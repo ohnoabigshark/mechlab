@@ -57,7 +57,9 @@ var MECH = new function () {
 //this.name
 //this.shortName
 function Compartment(shortName) {
-	this.shortName=shortName;
+	this.shortName = shortName;
+	this.armorType = "DEFAULT";
+	this.armorLevel = 1;
 	that = { "arguments": arguments };
 	this.containers = new function ( ) {
 		var containerArray = [];
@@ -66,6 +68,12 @@ function Compartment(shortName) {
 		}
 		return containerArray;
 	};
+	this.toString = function ( ) {
+		return this.shortName + "\n Armor Type: "+this.armorType
+				+"\n Armor Level: " +this.armorLevel+ "\n Containers:"
+				+this.containers;
+	};
+	cout(this);
 }
 
 var tCompartment = new Compartment("CT","v","dd");
@@ -96,6 +104,9 @@ function Container ( size, type ) {
 			container.appendChild(that.blockConstructor(EXTENSION));
 		}
 		return container;
+	};
+	this.toString = function ( ) {
+		
 	};
 }
 
