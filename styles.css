@@ -37,7 +37,7 @@ body {
 #console {
 	background-color: white;
     height: 30%;
-    width: 50%;
+    width: 99%;
     border: 1px solid black;
     overflow: scroll;
     position: absolute;
