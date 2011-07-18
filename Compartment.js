@@ -17,6 +17,18 @@ function Compartment(shortName) {
 	cout(this);
 }
 
+Compartment.prototype.addWeapon = function ( weapon ) {
+	for(var i=0;i<this.containers.length;i++) {
+		var container = this.containers[i];
+		if(weapon.type==container.type && weapon.size<=container.getAvailableSpace())
+			container.addWeapon(weapon);
+	}
+}
+
+Compartment.prototype.removeWeapon = function ( ) {
+	
+}
+
 Compartment.prototype.toString = function ( ) {
 		return this.shortName + "\n Armor Type: "+this.armorType
 				+"\n Armor Level: " +this.armorLevel+ "\n Containers:"

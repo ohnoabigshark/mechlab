@@ -5,9 +5,14 @@ var C = {
 	OMNI: 3
 }
 
+var DEBUG = true;
+
 var cout = function(text) {
+	if(!DEBUG)
+		return;
     dojo.create("h1", {
         innerHTML: text
     }, dojo.byId("console"), "first");
 
 }
+

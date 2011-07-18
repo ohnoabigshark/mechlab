@@ -10,6 +10,7 @@ function Container ( size, type ) {
 	that = this;
 	this.size = size;
 	this.type = type;
+	this.weapons = [];
 	this.div = new function ( ) {
 		var container = document.createElement("div");
 		switch ( type ) {
@@ -30,6 +31,22 @@ function Container ( size, type ) {
 
 Container.prototype.draw = function ( ) {
 	
+}
+
+Container.prototype.addWeapon = function ( weapon ) {
+	this.weapons.push(weapon);
+}
+
+Container.prototype.removeWeapon = ( name ) {
+	for(var i=0;i<this.weapons.length;i++)
+		if(this.weapons[i].name === name ) 
+			delete this.weapons[i];
+}
+
+Container.prototype.getAvailableSpace = function ( ) {
+	var space = 0+this.size;
+	for(var i=0;i<this.weapons.length;i++)
+		
 }
 
 Container.prototype.toString = function ( ) {

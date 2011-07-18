@@ -45,6 +45,7 @@ var LASER_WEAPONS = new function ( ) {
 			return;
 		}
 		weapons[name] = new Weapon( name, type, size, damage, reload, heat, recoil, effects );
+		cout(name+" created!");
 	};
 	//returns a copy of a weapon in the DB
 	this.createWeapon = function ( name ) { 
@@ -55,8 +56,13 @@ var LASER_WEAPONS = new function ( ) {
 		return;
 	};
 
-	this.addWeapon("ERLL",C.LASER,2,12,3000,10,0);
-	this.addWeapon("LL",C.LASER,2,10,2500,8,0);
+	this.init = function ( ) { 
+		this.addWeapon("ERLL",C.LASER,2,12,3000,10,0);
+		this.addWeapon("LL",C.LASER,2,10,2500,8,0);
+	};
+
+	this.init();
+
 }
 
 
@@ -72,21 +78,6 @@ var MECH = new function () {
 	};
 }
 
-
-
-
-
-
-//to avoid conflicts, should move definitions outside of here
-
-/*function ( type ) {
-			var block = document.createElement("div");
-			switch ( type ) {
-				case STARTER: block.className = "starterBlock"; break;
-				case EXTENSION: block.className = "extensionBlock"; break;
-			}
-			return block;
-		}*/
 var tCompartment = new Compartment("CT",new Container(2,C.BALLISTIC),new Container(1,C.LASER));
 cout(LASER_WEAPONS.createWeapon("LL"));
 
