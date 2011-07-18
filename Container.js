@@ -37,20 +37,35 @@ Container.prototype.addWeapon = function ( weapon ) {
 	this.weapons.push(weapon);
 }
 
-Container.prototype.removeWeapon = ( name ) {
-	for(var i=0;i<this.weapons.length;i++)
-		if(this.weapons[i].name === name ) 
+Container.prototype.removeWeapon = function ( name ) {
+	for(var i=0;i<this.weapons.length;i++) {
+		if(this.weapons[i].name === name ) {
 			delete this.weapons[i];
+			return;
+		}
+	}
 }
 
 Container.prototype.getAvailableSpace = function ( ) {
 	var space = 0+this.size;
-	for(var i=0;i<this.weapons.length;i++)
-		
+	for(var i=0;i<this.weapons.length;i++) {
+		space -= (this.weapons[i])?this.weapons[i].size:0;
+	}
+	return space;
 }
 
 Container.prototype.toString = function ( ) {
-		return "Container Type: "+this.type+" Container Size: "+this.size;
+		var that=this;
+		var weaponString = (function ( ) {
+			var st = "";
+			for ( var i=0;i<that.weapons.length;i++){
+				st+=((st)?",":"")+that.weapons[i];
+			}
+			return st;
+		})();
+		return "Container Type: "+this.type+"\n Container Size: "+this.size
+				+"\n Container Space: " + this.getAvailableSpace()
+				+"\n Container Weapons: " + weaponString;
 	}
 
 Container.prototype.blockConstructor = function ( type ) {
@@ -61,3 +76,18 @@ Container.prototype.blockConstructor = function ( type ) {
 			}
 			return block;
 		}
+
+Container.prototype.test = function ( lasers ) {
+	var ballistic = new Container ( 4, C.BALLISTIC );
+	var laser = new Container( 4, C.LASER );
+	var missile = new Container( 4, C.MISSILE );
+	var omni = new Container( 4, C.OMNI );
+	cout(laser.getAvailableSpace());
+	laser.addWeapon(lasers.createWeapon("ERLL"));
+	cout(laser.getAvailableSpace());
+	cout(laser);
+	laser.addWeapon(lasers.createWeapon("ERLL"));
+	cout(laser);
+	laser.removeWeapon("ERLL");
+	cout(laser);
+}

@@ -82,12 +82,13 @@ var tCompartment = new Compartment("CT",new Container(2,C.BALLISTIC),new Contain
 cout(LASER_WEAPONS.createWeapon("LL"));
 
 var test  = new Container(3,C.BALLISTIC);
+Container.prototype.test(LASER_WEAPONS);
 //document.getElementById("dump").appendChild(test.div);
 document.body.appendChild(test.div);
 
 /*each compartment should allow you to click on it and select an item that could potentially fit
 can select a part and then the container will call renderElements on itself*/
-    cout("console is alive!!");
+
   });
   //]]> 
   </script>
