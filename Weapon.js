@@ -12,3 +12,8 @@ function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
 Weapon.prototype.toString = function ( ) {
 	return this.name+" "+this.type;
 }
+
+Weapon.prototype.clone = function ( ) {
+	return new Weapon(this.name,this.type,this.size,this.damage,this.reload,
+						this.heat,this.recoil,this.effects);
+}

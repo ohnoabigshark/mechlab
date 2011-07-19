@@ -14,23 +14,28 @@ function Container ( size, type ) {
 	this.div = new function ( ) {
 		var container = document.createElement("div");
 		switch ( type ) {
-			case C.BALLISTIC: container.className = "yellow"; break;
-			case C.LASER: container.className = "red"; break;
-			case C.MISSILE: container.className = "green"; break;
-			case C.OMNI: container.className = "gray"; break;
+			case C.BALLISTIC: container.className = "yellow container"; break;
+			case C.LASER: container.className = "red container"; break;
+			case C.MISSILE: container.className = "green container"; break;
+			case C.OMNI: container.className = "gray container"; break;
 		}
 		
-		container.appendChild(that.blockConstructor(STARTER));
+		var background = document.createElement("div");
+		background.className = "slots";
+		background.appendChild(that.blockConstructor(STARTER));
 		for ( var i = 1; i < size; i++ ) {
-			container.appendChild(that.blockConstructor(EXTENSION));
+			background.appendChild(that.blockConstructor(EXTENSION));
 		}
+		container.appendChild(background);
 		return container;
 	};
 
 }
 
 Container.prototype.draw = function ( ) {
-	
+	for(var i=0;i<this.weapons.length;i++) {
+		this.div.appendChild(this.weapons[i].div);
+	}
 }
 
 Container.prototype.addWeapon = function ( weapon ) {
@@ -40,14 +45,13 @@ Container.prototype.addWeapon = function ( weapon ) {
 Container.prototype.removeWeapon = function ( name ) {
 	for(var i=0;i<this.weapons.length;i++) {
 		if(this.weapons[i].name === name ) {
-			delete this.weapons[i];
-			return;
+			this.weapons.splice(i,1);
 		}
 	}
 }
 
 Container.prototype.getAvailableSpace = function ( ) {
-	var space = 0+this.size;
+	var space = this.size;
 	for(var i=0;i<this.weapons.length;i++) {
 		space -= (this.weapons[i])?this.weapons[i].size:0;
 	}

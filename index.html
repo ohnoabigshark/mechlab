@@ -9,6 +9,8 @@
  <link rel="stylesheet" type="text/css" href="styles.css">
   <script type="text/javascript" src="Global.js"></script>
   <script type="text/javascript" src="Weapon.js"></script>
+  <script type="text/javascript" src="Factory.js"></script>
+  <script type="text/javascript" src="WeaponFactory.js"></script>
   <script type="text/javascript" src="Container.js"></script>
   <script type="text/javascript" src="Compartment.js"></script>
   <script type='text/javascript'>
@@ -50,11 +52,17 @@ var LASER_WEAPONS = new function ( ) {
 	//returns a copy of a weapon in the DB
 	this.createWeapon = function ( name ) { 
 		if(weapon=weapons[name])
-			return new Weapon(weapon.name,weapon.type,weapon.size,weapon.damage,weapon.reload,
-						weapon.heat,weapon.recoil,weapon.effects);
+			return weapon.clone();
 		cout("could not find weapon with name: "+name);
 		return;
 	};
+
+	this.getWeapon = function ( name ) {
+		if(weapon=weapons[name])
+			return weapon;
+		cout("could not find weapon with name: "+name);
+		return;
+	}
 
 	this.init = function ( ) { 
 		this.addWeapon("ERLL",C.LASER,2,12,3000,10,0);

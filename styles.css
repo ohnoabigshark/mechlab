@@ -74,7 +74,7 @@ body {
 	width: 100px;
 }*/
 
-.yellow:hover > div, .yellow:hover > div:before {
+.container:hover > .slots > div, .container:hover > .slots > div:before {
 	background-color: gray;
 	background-image: none;
 }
