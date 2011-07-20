@@ -91,6 +91,8 @@ cout(LASER_WEAPONS.createWeapon("LL"));
 
 var test  = new Container(3,C.BALLISTIC);
 Container.prototype.test(LASER_WEAPONS);
+cout(new Factory("WEAPON",["heat","damage"]));
+Factory.prototype.test();
 //document.getElementById("dump").appendChild(test.div);
 document.body.appendChild(test.div);
 
