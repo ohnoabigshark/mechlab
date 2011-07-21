@@ -13,6 +13,7 @@
   <script type="text/javascript" src="WeaponFactory.js"></script>
   <script type="text/javascript" src="Container.js"></script>
   <script type="text/javascript" src="Compartment.js"></script>
+  <script type="text/javascript" src="Schematic.js"></script>
   <script type='text/javascript'>
   //<![CDATA[ 
   dojo.connect(window, "onload", function(){
@@ -91,8 +92,8 @@ cout(LASER_WEAPONS.createWeapon("LL"));
 
 var test  = new Container(3,C.BALLISTIC);
 Container.prototype.test(LASER_WEAPONS);
-cout(new Factory("WEAPON",["heat","damage"]));
-Factory.prototype.test();
+//Factory.prototype.test();
+WeaponFactory.prototype.test();
 //document.getElementById("dump").appendChild(test.div);
 document.body.appendChild(test.div);
 
