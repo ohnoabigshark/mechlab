@@ -11,7 +11,7 @@ function Container ( size, type ) {
 	this.size = size;
 	this.type = type;
 	this.weapons = [];
-	this.div = new function ( ) {
+	this.div = new function ( ) { //should move this to draw so we dont keep ref to div
 		var container = document.createElement("div");
 		switch ( type ) {
 			case C.BALLISTIC: container.className = "yellow container"; break;

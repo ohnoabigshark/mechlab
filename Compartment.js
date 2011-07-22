@@ -17,7 +17,10 @@ function Compartment(shortName) {
 	cout(this);
 }
 
-Compartment.prototype.addWeapon = function ( weapon ) {
+Compartment.prototype.addWeapon = function ( weapon, container ) {
+	if ( container ) {
+		getContainer(container).addWeapon(weapon);
+	}
 	for(var i=0;i<this.containers.length;i++) {
 		var container = this.containers[i];
 		if(weapon.type==container.type && weapon.size<=container.getAvailableSpace())
@@ -25,8 +28,15 @@ Compartment.prototype.addWeapon = function ( weapon ) {
 	}
 }
 
-Compartment.prototype.removeWeapon = function ( ) {
-	
+Compartment.prototype.removeWeapon = function ( weaponName, container ) {
+	this.getContainer(container).removeWeapon(weaponName);
+}
+
+Compartment.prototype.getContainer = function ( containerType ) {
+	for ( var i = 0; i<this.containers.length;i++) {
+		if ( this.containers[i].type === containerType ) 
+			return this.containers[i];
+	}
 }
 
 Compartment.prototype.toString = function ( ) {

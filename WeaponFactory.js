@@ -1,6 +1,7 @@
 WeaponFactory.prototype = new Factory();
 WeaponFactory.constructor = WeaponFactory;
 
+
 function WeaponFactory ( ) {
 	this.type = "Weapon";
 	this.schematic = new Schematic(["name","type","size","damage","reload","heat","recoil","effects"]);
