@@ -11,6 +11,12 @@ function FactoryItem ( schematic ) {
 	this.schematic = schematic;
 }
 
+FactoryItem.prototype.UID = 0;
+
 FactoryItem.prototype.build = function ( ) {
 	
+}
+
+FactoryItem.prototype.generateUID = function ( ) {
+	return ++this.UID;
 }

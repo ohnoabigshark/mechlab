@@ -26,9 +26,11 @@ WeaponFactory.prototype.build = function ( name ) {
 
 
 WeaponFactory.prototype.test = function ( ) { 
-	var wf = new WeaponFactory();
-	wf.addBlueprint({"name":"ERLL","type":C.LASER,"size":2,"damage":12,"reload":3000,"heat":10,"recoil":0,"effects":[]});
-	cout(wf);
-	cout(wf.printBlueprints());
-	cout(wf.build("ERLL"));
+	var f = new WeaponFactory();
+	f.addBlueprint({"name":"ERLL","type":C.LASER,"size":2,"damage":12,"reload":3000,"heat":10,"recoil":0,"effects":[]});
+	cout(f);
+	f.addStrict("LL",C.LASER,2,10,2500,8,0,[]);
+	f.addStrict("SL",C.LASER,1,3,1000,5,0,[]);
+	cout(f.printBlueprints());
+	cout(f.build("ERLL"));
 }

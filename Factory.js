@@ -45,6 +45,14 @@ Factory.prototype.addBlueprint = function ( blueprint ) {
 	this.blueprints[blueprint.name] = blueprint; //assumes true, should assume false
 }
 
+Factory.prototype.addStrict = function ( ) {
+	var tempBlueprint = { };
+	for ( var i = 0; i<arguments.length;i++) {
+		tempBlueprint[this.schematic.properties[i]] = arguments[i];
+	}
+	this.addBlueprint(tempBlueprint);
+}
+
 Factory.prototype.removeBlueprint = function ( name ) {
 	//should do a check to see if it's actually there
 	delete this.blueprints[name];
@@ -69,7 +77,7 @@ Factory.prototype.printBlueprints = function ( ) {
 	for ( var name in this.blueprints ) {
 		if(this.blueprints.hasOwnProperty(name)) {
 			s += (function ( that, name ) { //does this close over name? should we make it not?
-				var ss = that.type+"Factory Blueprint: "; 
+				var ss = "<br>"+that.type+"Factory Blueprint: "; 
 				for ( var bName in that.blueprints[name] ) {
 					if(that.blueprints[name].hasOwnProperty(bName)) {
 						ss+=bName+":"+that.blueprints[name][bName]+" ";						
@@ -85,17 +93,7 @@ Factory.prototype.printBlueprints = function ( ) {
 }
 
 Factory.prototype.build = function ( name ) { 
-	//cout("needs to be defined in subclasses");
-	/*
-	This code does not work. We would need a way to encapsulate
-	data coming from the blueprint which is way too much work.
 
-	var bp = this.getBlueprint(name);
-	var s = "";
-	for ( var i = 0; i<this.schematic.properties.length;i++) {
-		s+=bp[this.schematic.properties[i]]+=",";
-	}
-	return eval("new Weapon("+s.substr(0,s.length-1)+");");*/
 }
 
 Factory.prototype.toString = function ( ) {

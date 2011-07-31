@@ -115,3 +115,55 @@ body {
 	width: 100px;
 	margin-top: 13px;
 }
+
+
+.cnt {
+	width: 100px;
+	border: 1px solid black;
+	height: 72px;
+}
+
+.containerBlock {
+	height: 24px;
+	width: 100%;
+}
+
+.containerItemLayer {
+	position: relative;
+	top: -72px;
+	left: 0px;
+	z-index: 2;	
+}
+
+.containerBackgroundLayer { 
+	position: relative;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.weapon { 
+	width: 98px;
+	height: 24px;
+	border: 1px solid red;
+	background-color: rgba(190,190,190,0.5);
+}
+
+.weapon > h1 {
+	font-size: 0.5em;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+}
+
+.weapon > img {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}

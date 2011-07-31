@@ -1,4 +1,8 @@
+Weapon.prototype = new FactoryItem();
+Weapon.constructor = Weapon;
+
 function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
+	this.id = this.generateUID();
 	this.name = name;
 	this.type = type;
 	this.size = size;
@@ -9,6 +13,8 @@ function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
 	this.effects = effects;
 }
 
+
+
 Weapon.prototype.toString = function ( ) {
 	return this.name+" "+this.type;
 }
@@ -17,3 +23,24 @@ Weapon.prototype.clone = function ( ) {
 	return new Weapon(this.name,this.type,this.size,this.damage,this.reload,
 						this.heat,this.recoil,this.effects);
 }
+
+Weapon.prototype.draw = function ( ) {
+	var div = document.createElement("div");
+	var nameNode = document.createElement("h1");
+	nameNode.appendChild(document.createTextNode(this.name));
+	var imageNode = document.createElement("img");
+	imageNode.src = "http://placehold.it/24x24";
+	div.className = "weapon";
+	div.id = this.id;
+	div.style.height = 24*this.size+"px";
+	div.appendChild(nameNode);
+	div.appendChild(imageNode);
+	div.className += " hidden";
+	document.body.appendChild(div);
+	imageNode.style.top = (-nameNode.clientHeight)+((div.clientHeight/2)-(imageNode.clientHeight/2))+"px";
+	imageNode.style.left = ((div.clientWidth/2)-(imageNode.clientWidth/2))+"px";
+	document.body.removeChild(div);
+	div.className = "weapon";
+	return div;
+}
+

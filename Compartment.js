@@ -33,9 +33,35 @@ Compartment.prototype.removeWeapon = function ( weaponName, container ) {
 }
 
 Compartment.prototype.getContainer = function ( containerType ) {
+	var containers = [];
 	for ( var i = 0; i<this.containers.length;i++) {
 		if ( this.containers[i].type === containerType ) 
+			containers.push(this.containers[i]);
+	}
+	return containers || null;
+}
+
+Compartment.prototype.getContainerById = function ( containerId ) { 
+	for ( var i = 0; i < this.containers.length;i++){
+		if(this.containers[i].id == containerId)
 			return this.containers[i];
+	}
+	return null;
+}
+
+Compartment.prototype.addContainer = function ( container ) {
+	if (this.getContainerById(container.id)) {
+		cout("we already have a container with this id");
+		return null;
+	}
+	this.containers.push(container);
+}
+
+Compartment.prototype.removeContainer = function ( id ) {
+	for(var i=0;i<this.containers.length;i++) {
+		if(this.containers[i].id == id ) {
+			this.containers.splice(i,1);
+		}
 	}
 }
 

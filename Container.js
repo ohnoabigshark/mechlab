@@ -3,8 +3,12 @@ but they would have differing drag/drop interactions
 
 or have a block item class then extend it for both weapon and container*/
 
+Container.prototype = new FactoryItem();
+Container.constructor = Container;
+
 function Container ( size, type ) {
 	//needs a UID?
+	this.id = this.generateUID();
 	var STARTER = 0;
 	var EXTENSION = 1;
 	that = this;
@@ -32,14 +36,38 @@ function Container ( size, type ) {
 
 }
 
+//two ways to write this, either using class tricks
+//(applying diff classes programatically to determine position of bg and
+//size of bg) and only a single div for the container or have each container
+//div have a subdiv for background and put weapons in foreground div
+
 Container.prototype.draw = function ( ) {
-	for(var i=0;i<this.weapons.length;i++) {
-		this.div.appendChild(this.weapons[i].div);
+	var container = document.createElement("div");
+	var backgroundLayer = document.createElement("div");
+	backgroundLayer.className = "containerBackgroundLayer";
+	var itemLayer = document.createElement("div");
+	itemLayer.className = "containerItemLayer";
+	container.id = this.id;
+	container.className = "cnt";
+	for ( var i=0; i<this.size; i++) {
+		var block = document.createElement("div");
+		block.className = "containerBlock";
+		backgroundLayer.appendChild(block);
 	}
+	for(var i=0;i<this.weapons.length;i++) {
+		itemLayer.appendChild(this.weapons[i].draw());
+	}
+	container.appendChild(backgroundLayer);
+	container.appendChild(itemLayer);
+	return container;
 }
 
 Container.prototype.addWeapon = function ( weapon ) {
-	this.weapons.push(weapon);
+	if ( this.getAvailableSpace() >= weapon.size ) {
+		this.weapons.push(weapon);
+		return true;
+	}
+	return false;
 }
 
 Container.prototype.removeWeapon = function ( name ) {
@@ -67,7 +95,7 @@ Container.prototype.toString = function ( ) {
 			}
 			return st;
 		})();
-		return "Container Type: "+this.type+"\n Container Size: "+this.size
+		return "Container ID:"+this.id+"Container Type: "+this.type+"\n Container Size: "+this.size
 				+"\n Container Space: " + this.getAvailableSpace()
 				+"\n Container Weapons: " + weaponString;
 	}
@@ -94,4 +122,5 @@ Container.prototype.test = function ( lasers ) {
 	cout(laser);
 	laser.removeWeapon("ERLL");
 	cout(laser);
+	cout(ballistic);
 }

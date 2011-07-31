@@ -8,8 +8,10 @@
   
  <link rel="stylesheet" type="text/css" href="styles.css">
   <script type="text/javascript" src="Global.js"></script>
+    <script type="text/javascript" src="FactoryItem.js"></script>
   <script type="text/javascript" src="Weapon.js"></script>
   <script type="text/javascript" src="Factory.js"></script>
+
   <script type="text/javascript" src="WeaponFactory.js"></script>
   <script type="text/javascript" src="Container.js"></script>
   <script type="text/javascript" src="Compartment.js"></script>
@@ -87,15 +89,15 @@ var MECH = new function () {
 	};
 }
 
-var tCompartment = new Compartment("CT",new Container(2,C.BALLISTIC),new Container(1,C.LASER));
-cout(LASER_WEAPONS.createWeapon("LL"));
-
 var test  = new Container(3,C.BALLISTIC);
 Container.prototype.test(LASER_WEAPONS);
-//Factory.prototype.test();
 WeaponFactory.prototype.test();
-//document.getElementById("dump").appendChild(test.div);
-document.body.appendChild(test.div);
+var wf = new WeaponFactory();
+test.addWeapon(wf.build("ERLL"));
+test.addWeapon(wf.build("SL"));
+//test.addWeapon(wf.build("ERLL"));
+document.body.appendChild(document.createElement("br"));
+document.body.appendChild(test.draw());
 
 /*each compartment should allow you to click on it and select an item that could potentially fit
 can select a part and then the container will call renderElements on itself*/
