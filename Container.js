@@ -8,7 +8,6 @@ Container.constructor = Container;
 
 function Container ( size, type ) {
 	//needs a UID?
-	this.id = this.generateUID();
 	var STARTER = 0;
 	var EXTENSION = 1;
 	that = this;
@@ -63,6 +62,10 @@ Container.prototype.draw = function ( ) {
 }
 
 Container.prototype.addWeapon = function ( weapon ) {
+	if(!weapon) {
+		cout("no weapon given to Container");
+		return false;
+	}
 	if ( this.getAvailableSpace() >= weapon.size ) {
 		this.weapons.push(weapon);
 		return true;

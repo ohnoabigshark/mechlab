@@ -2,32 +2,27 @@ function Factory ( type, schematic ) {
 	this.type = type;
 	this.schematic = schematic;
 	this.blueprints = {};
+	this.uid = 0;
 	//this.build = buildFunc;
 }
 
+Factory.prototype.initBlueprints = function ( blueprints ) { //should have support for reading a file in nodejs
+	//todo file import/DB import
+	//check if blueprints is an array. add support for recognizing file input
+	//or just have something convert for us
+	for ( var i=0; i < blueprints.length; i++ ) {
+		this.addBlueprint(blueprints[i]);
+	}
+}
 
-//INTENDED FACTORY USAGE PATTERN
-//every schematic must have a name property
-//var x = new Factory("Weapon"/*name*/,new Schematic(/*))
+Factory.prototype.readBlueprintFile = function () {
+	//do this for nodejs
+}
 
+Factory.prototype.getUID = function ( ) {
+	return this.type+(++this.uid);
+}
 
-//factory should have a schematic that is an array of attr names
-//the blueprint object is checked to ensure it has all attr names of the array
-//and can subsequently pull them all from the object (blueprint[schematic[i]]) to construct a new 
-//object of whatever type. This way the schematic could be output by any
-//weapon/component/whathaveyou and automatically be set up. I think this
-//also allows for a generic build if I want it (eval("new "+this.type+"("+args+");"))
-//for rapid prototyping but can always extend Factory and write a specific build
-//method. Removes need to have perfectly formatted schematics!
-//Could have a SchematicProduct class that takes an array of arguments (the schematic)
-//and can return them as a static method. This way we can eval(this.type+".prototype.getSchematic()")
-//which can be pumped into the generic build eval mentioned earlier.
-
-//but even all of that discussion seems mostly useless as we dont have a need
-//to be able to create many factories with this kind of generic 
-//having clearly extended factories that lack this generic nature is fine
-//each would have a type and a build function that just took an object of params
-//and would build strictly to that
 Factory.prototype.addBlueprint = function ( blueprint ) { 
 	if ( !blueprint.name ) {
 		cout("blueprint doesnt have name, cant add");
@@ -92,6 +87,16 @@ Factory.prototype.printBlueprints = function ( ) {
 	return s;
 }
 
+Factory.prototype.getBlueprints = function ( ) {  //returns an array
+	var blueprints = [];
+	for ( var name in this.blueprints ) { 
+		if ( this.blueprints.hasOwnProperty(name)) { //probs wanna check if what we're getting back is a bluepritn as well
+			blueprints.push(this.blueprints[name]);			
+		}
+	}
+	return blueprints;
+}
+
 Factory.prototype.build = function ( name ) { 
 
 }
@@ -109,7 +114,10 @@ Factory.prototype.test = function ( ) {
 	f.removeBlueprint("Blah");
 	cout(f.printBlueprints());
 		f.addBlueprint({"name":"Blah","blue":1,"green":2});
+		f.addBlueprint({"name":"Blah2","blue":1,"green":2});
 	cout(f.printBlueprints());
 	cout(f);
 	f.build("Blah");
+	cout(f.getBlueprints());
+	cout(f.getUID()+ " "+f.getUID()+ " " +f.getUID());
 }

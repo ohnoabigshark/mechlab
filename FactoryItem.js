@@ -9,14 +9,13 @@
 
 function FactoryItem ( schematic ) {
 	this.schematic = schematic;
+	if (FactoryItem.counter>=0)
+		FactoryItem.counter++;
+	else
+		FactoryItem.counter = 0;
+	this.id = FactoryItem.counter;
 }
-
-FactoryItem.prototype.UID = 0;
 
 FactoryItem.prototype.build = function ( ) {
 	
-}
-
-FactoryItem.prototype.generateUID = function ( ) {
-	return ++this.UID;
 }

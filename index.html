@@ -20,7 +20,11 @@
   //<![CDATA[ 
   dojo.connect(window, "onload", function(){
   
-
+Object.create = function (parent) {
+  function F() {}
+  F.prototype = parent;
+  return new F();
+}
 
 
 var MechLayoutTool = new function ( ) {
@@ -89,12 +93,19 @@ var MECH = new function () {
 	};
 }
 
+//Factory.prototype.test();
 var test  = new Container(3,C.BALLISTIC);
 Container.prototype.test(LASER_WEAPONS);
-WeaponFactory.prototype.test();
+//WeaponFactory.prototype.test();
 var wf = new WeaponFactory();
+wf.addBlueprint({"name":"ERLL","type":C.LASER,"size":2,"damage":12,"reload":3000,"heat":10,"recoil":0,"effects":[]});
+wf.addStrict("LL",C.LASER,2,10,2500,8,0,[]);
+wf.addStrict("SL",C.LASER,1,3,1000,5,0,[]);
+var wff = new WeaponFactory();
 test.addWeapon(wf.build("ERLL"));
 test.addWeapon(wf.build("SL"));
+cout(wf.getUID()+ " "+wf.getUID()+ " " +wf.getUID());
+cout(wff.getUID()+ " "+wff.getUID()+ " " +wff.getUID());
 //test.addWeapon(wf.build("ERLL"));
 document.body.appendChild(document.createElement("br"));
 document.body.appendChild(test.draw());

@@ -2,7 +2,6 @@ Weapon.prototype = new FactoryItem();
 Weapon.constructor = Weapon;
 
 function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
-	this.id = this.generateUID();
 	this.name = name;
 	this.type = type;
 	this.size = size;
@@ -16,7 +15,7 @@ function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
 
 
 Weapon.prototype.toString = function ( ) {
-	return this.name+" "+this.type;
+	return this.name+" "+this.type+" ID:"+this.id;
 }
 
 Weapon.prototype.clone = function ( ) {

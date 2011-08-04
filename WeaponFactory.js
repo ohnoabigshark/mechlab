@@ -5,6 +5,7 @@ WeaponFactory.constructor = WeaponFactory;
 function WeaponFactory ( ) {
 	this.type = "Weapon";
 	this.schematic = new Schematic(["name","type","size","damage","reload","heat","recoil","effects"]);
+	Factory.call(this,this.type,this.schematic);
 }
 //so now that we guarantee that a schematic has the same prop order
 //can we make a generic build?
