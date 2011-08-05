@@ -1,7 +1,7 @@
-Weapon.prototype = new FactoryItem();
+Weapon.prototype = {};
 Weapon.constructor = Weapon;
 
-function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
+function Weapon ( name, type, faction, size, damage, reload, heat, recoil, effects ) {
 	this.name = name;
 	this.type = type;
 	this.size = size;
@@ -10,6 +10,7 @@ function Weapon ( name, type, size, damage, reload, heat, recoil, effects ) {
 	this.heat = heat;
 	this.recoil = recoil;
 	this.effects = effects;
+	Object.call(this);
 }
 
 

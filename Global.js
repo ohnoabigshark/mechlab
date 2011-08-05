@@ -10,9 +10,10 @@ var DEBUG = true;
 var cout = function(text) {
 	if(!DEBUG)
 		return;
-    dojo.create("h1", {
+    /*dojo.create("h1", {
         innerHTML: text
-    }, dojo.byId("console"), "first");
+    }, dojo.byId("console"), "first");*/
+    console.log(text);
 
 }
 

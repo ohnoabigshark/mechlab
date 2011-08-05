@@ -1,9 +1,9 @@
-function Factory ( type, schematic ) {
+function Factory ( type, schematic, blueprints ) { //blueprints should be their own object
 	this.type = type;
 	this.schematic = schematic;
 	this.blueprints = {};
 	this.uid = 0;
-	//this.build = buildFunc;
+	return this;
 }
 
 Factory.prototype.initBlueprints = function ( blueprints ) { //should have support for reading a file in nodejs
